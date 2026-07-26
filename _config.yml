@@ -3,7 +3,7 @@ description: A catalog of classic items.
 baseurl: "/TheSims1Encyclopedia"
 url: "https://changeallthetime123-debug.github.io"
 
-# Define the custom collection for objects
 collections:
   objects:
     output: true
+    permalink: /objects/:title/
