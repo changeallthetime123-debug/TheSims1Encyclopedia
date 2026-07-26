@@ -1,1 +1,0 @@
-# TheSims1Encyclopedia
