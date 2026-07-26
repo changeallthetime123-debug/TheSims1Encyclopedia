@@ -1,20 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>The Sims 1 Encyclopedia</title>
-
-  <!-- Link your CSS file here -->
-  <link rel="stylesheet" href="styles.css">
-
-</head>
-<body>
-
-  <h1>The Sims 1 Encyclopedia</h1>
-
-</body>
-</html>
-
 body {
   background-color: #000052;
+  color: #ffffff; /* Adds white text so your heading is visible on dark blue */
 }
