@@ -1,8 +1,10 @@
 ---
-layout: item
-title: Archimaster Toilet
-category: Plumbing
-price: 450
+layout: object
+title: Spooky Scarecrow
+price: 150
+expansion: Makin' Magic
+motives: Room +2
+image: /assets/images/scarecrow.png
 ---
 
-The **Archimaster Toilet** is the standard plumbing fixture from the base game. It requires regular cleaning and maintenance by Sims or a Maid.
+Perfect for keeping the crows away from your garden plots. It has an oddly watchful gaze.
