@@ -1,7 +1,7 @@
 title: The Sims 1 Object Encyclopedia
 description: A catalog of classic items.
-baseurl: "/objects" 
-url: "https://yourusername.github.io"
+baseurl: "/TheSims1Encyclopedia"
+url: "https://changeallthetime123-debug.github.io"
 
 # Define the custom collection for objects
 collections:
