@@ -1,28 +1,55 @@
 ---
+layout: null
 ---
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Sims 1 Encyclopedia</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <title>Sims 1 Object Encyclopedia</title>
+    <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}">
 </head>
 <body>
+    <div class="sims-panel">
+        <h1>The Sims 1 Object Catalog</h1>
+        
+        <div class="filter-bar">
+            <label>Filter by Game: 
+                <select id="expansionFilter">
+                    <option value="all">All</option>
+                    <option value="Base Game">Base Game</option>
+                    <option value="Makin' Magic">Makin' Magic</option>
+                    <option value="Hot Date">Hot Date</option>
+                </select>
+            </label>
+        </div>
 
-  <h1>The Sims 1 Encyclopedia</h1>
-  <p>Welcome to the catalog!</p>
+        <div class="object-grid" id="catalogGrid">
+            {% for obj in site.objects %}
+            <a href="{{ obj.url | relative_url }}" class="sims-panel object-card" data-expansion="{{ obj.expansion }}">
+                <img src="{{ obj.image | relative_url }}" alt="{{ obj.title }}">
+                <h3>{{ obj.title }}</h3>
+                <span class="price-tag">§{{ obj.price }}</span>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
 
-  <h2>Catalog Items</h2>
-  <ul>
-    {% for item in site.pages %}
-      {% if item.layout == "item" %}
-        <li>
-          <a href="{{ item.url }}">{{ item.title }}</a> - §{{ item.price }}
-        </li>
-      {% endif %}
-    {% endfor %}
-  </ul>
+    <script>
+        const filterDropdown = document.getElementById('expansionFilter');
+        const cards = document.querySelectorAll('.object-card');
 
+        filterDropdown.addEventListener('change', function() {
+            const selected = this.value;
+            
+            cards.forEach(card => {
+                // If "all" is selected, or the card's data attribute matches the dropdown
+                if (selected === 'all' || card.getAttribute('data-expansion') === selected) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
