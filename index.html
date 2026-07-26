@@ -3,13 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <title>The Sims 1 Encyclopedia</title>
-  
-  <!-- Links to your styles.css file -->
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
   <h1>The Sims 1 Encyclopedia</h1>
+  <p>Welcome to the catalog!</p>
+
+  <h2>Catalog Items</h2>
+  <ul>
+    <!-- Jekyll will automatically generate a link for every item file you create -->
+    {% for item in site.pages %}
+      {% if item.layout == "item" %}
+        <li>
+          <a href="{{ item.url }}">{{ item.title }}</a> - §{{ item.price }}
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
 
 </body>
 </html>
