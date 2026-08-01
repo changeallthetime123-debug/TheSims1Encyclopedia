@@ -25,16 +25,33 @@ layout: null
 
         <div class="object-grid" id="catalogGrid">
             {% for obj in site.objects %}
-            <a href="{{ obj.url | relative_url }}" class="sims-panel object-card" data-expansion="{{ obj.expansion }}">
+            <div class="sims-panel object-card" 
+                 data-expansion="{{ obj.expansion }}"
+                 data-title="{{ obj.title }}"
+                 data-price="§{{ obj.price }}"
+                 data-img="{{ obj.image | relative_url }}"
+                 data-desc="{{ obj.description | default: '' }}">
                 <img src="{{ obj.image | relative_url }}" alt="{{ obj.title }}">
                 <h3>{{ obj.title }}</h3>
                 <span class="price-tag">§{{ obj.price }}</span>
-            </a>
+            </div>
             {% endfor %}
         </div>
     </div>
 
+    <!-- Modal Overlay -->
+    <div id="object-modal" class="modal-overlay hidden">
+        <div class="modal-content sims-panel">
+            <button id="modal-close" class="modal-close">&times;</button>
+            <img id="modal-img" src="" alt="" style="width: 150px; height: 150px; display: block; margin: 0 auto 15px;">
+            <h2 id="modal-title"></h2>
+            <p id="modal-price" class="price-tag"></p>
+            <p id="modal-desc"></p>
+        </div>
+    </div>
+
     <script>
+        // Filter logic
         const filterDropdown = document.getElementById('expansionFilter');
         const cards = document.querySelectorAll('.object-card');
 
@@ -42,13 +59,46 @@ layout: null
             const selected = this.value;
             
             cards.forEach(card => {
-                // If "all" is selected, or the card's data attribute matches the dropdown
                 if (selected === 'all' || card.getAttribute('data-expansion') === selected) {
                     card.classList.remove('hidden');
                 } else {
                     card.classList.add('hidden');
                 }
             });
+        });
+
+        // Modal logic
+        const modal = document.getElementById('object-modal');
+        const modalClose = document.getElementById('modal-close');
+        const modalTitle = document.getElementById('modal-title');
+        const modalPrice = document.getElementById('modal-price');
+        const modalImg = document.getElementById('modal-img');
+        const modalDesc = document.getElementById('modal-desc');
+
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                modalTitle.textContent = card.dataset.title;
+                modalPrice.textContent = card.dataset.price;
+                modalImg.src = card.dataset.img;
+                modalImg.alt = card.dataset.title;
+                modalDesc.textContent = card.dataset.desc;
+
+                modal.classList.remove('hidden');
+            });
+        });
+
+        const closeModal = () => modal.classList.add('hidden');
+
+        modalClose.addEventListener('click', closeModal);
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                closeModal();
+            }
         });
     </script> 
 </body>
